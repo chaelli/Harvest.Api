@@ -1117,13 +1117,14 @@ namespace Harvest.Api
                 .SendAsync<ExpenseReportResponse>(_httpClient, cancellationToken);
         }
 
-        public async Task<UninvoicedReportResponse> GetUninvoicedReportAsync(DateTime fromDate, DateTime toDate, int? page = null, int? perPage = null,
+        public async Task<UninvoicedReportResponse> GetUninvoicedReportAsync(DateTime fromDate, DateTime toDate, bool includeFixedFee, int? page = null, int? perPage = null,
             long? accountId = null, CancellationToken cancellationToken = default)
         {
             await RefreshTokenIsNeeded();
             return await SimpleRequestBuilder($"{harvestApiUrl}/reports/uninvoiced", accountId)
                 .Query("from", fromDate)
                 .Query("to", toDate)
+                .Query("include_fixed_fee", includeFixedFee.ToString())
                 .Query("page", page)
                 .Query("per_page", perPage)
                 .SendAsync<UninvoicedReportResponse>(_httpClient, cancellationToken);
