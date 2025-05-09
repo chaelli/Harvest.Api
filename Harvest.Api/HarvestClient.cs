@@ -1124,7 +1124,7 @@ namespace Harvest.Api
             return await SimpleRequestBuilder($"{harvestApiUrl}/reports/uninvoiced", accountId)
                 .Query("from", fromDate)
                 .Query("to", toDate)
-                .Query("include_fixed_fee", includeFixedFee.ToString())
+                .Query("include_fixed_fee", includeFixedFee)
                 .Query("page", page)
                 .Query("per_page", perPage)
                 .SendAsync<UninvoicedReportResponse>(_httpClient, cancellationToken);
